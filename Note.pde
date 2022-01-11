@@ -1,5 +1,5 @@
 class Note{
-  int n; 
+  int n, previousN;
   float t;
   PVector p;
   float r;
@@ -9,40 +9,37 @@ class Note{
   
   Note(int _n){
     n = _n;
-    t = random(1);
+    previousN = n;
+    t = n/12.;
     r = width*.04*(n+1);
     p = new PVector(r*cos(TWO_PI*t-HALF_PI), r*sin(TWO_PI*t-HALF_PI));
   }
   
   void update(){
     r = width*.04*(n+1);
-    float a = atan2(mouse.x, mouse.y);
+    p = new PVector(r*cos(TWO_PI*t-HALF_PI), r*sin(TWO_PI*t-HALF_PI));
     if(pressed){
+      float a = atan2(mouse.x, mouse.y);
+      float d = mouse.dist(center);
+      int newN = int((d/(0.04*width))-.5);
+      n = newN;
       t = (PI-a)/TWO_PI;
-      p = new PVector(r*cos(TWO_PI*t-HALF_PI), r*sin(TWO_PI*t-HALF_PI));
     }
     ballSize = pressed ? 20 : 10;
   }
   
   void draw(){
     update();
-    float r = width*.04*(n+1);
-    
-    // Orbita
-    noFill();
-    strokeWeight(1);
-    stroke(127);
-    ellipse(0, 0, 2*r, 2*r);
     
     // Linia interior
     strokeWeight(3);
     stroke(255);
-    line(0, 0, r*cos(TWO_PI*t-HALF_PI), r*sin(TWO_PI*t-HALF_PI));
+    line(0, 0, p.x, p.y);
     
     // Linia exterior
     stroke(127);
     strokeWeight(1);
-    line(r*cos(TWO_PI*t-HALF_PI), r*sin(TWO_PI*t-HALF_PI), width*.48*cos(TWO_PI*t-HALF_PI), width*.48*sin(TWO_PI*t-HALF_PI));
+    line(p.x, p.y, width*.48*cos(TWO_PI*t-HALF_PI), width*.48*sin(TWO_PI*t-HALF_PI));
     
     // Boleta
     stroke(255);
@@ -57,12 +54,14 @@ class Note{
   }
   
   void mouseReleased(){
+    t = round(32.*t)/32.;
     pressed = false;  
     played = false;
+    previousN = n;
   }
   
   void play(float time){
-    if(!played && time>t){
+    if(!played && time>=t){
       played = true;  
       sendMessage(n);
     }
