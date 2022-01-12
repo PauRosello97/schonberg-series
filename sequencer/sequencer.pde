@@ -15,7 +15,7 @@ void setup(){
   myRemoteLocation = new NetAddress("127.0.0.1", 9999);
   
   notes = new ArrayList<Note>();
-  for(int i=0; i<12; i++){
+  for(int i=0; i<19; i++){
     notes.add(new Note(i));  
   }
 }
@@ -41,12 +41,12 @@ void draw(){
   stroke(116, 23, 150);
   line(0, 0, width*cos(TWO_PI*hand-HALF_PI), width*sin(TWO_PI*hand-HALF_PI));
   
-  for(int i=0; i<12; i++){
+  for(int i=0; i<19; i++){
     // Orbita
     noFill();
     strokeWeight(1);
     stroke(127);
-    float r = width*.04*(i+1);
+    float r = width*.025*(i+1);
     ellipse(0, 0, 2*r, 2*r);
   }
   

@@ -10,18 +10,18 @@ class Note{
   Note(int _n){
     n = _n;
     previousN = n;
-    t = n/12.;
-    r = width*.04*(n+1);
+    t = n/19.;
+    r = width*.025*(n+1);
     p = new PVector(r*cos(TWO_PI*t-HALF_PI), r*sin(TWO_PI*t-HALF_PI));
   }
   
   void update(){
-    r = width*.04*(n+1);
+    r = width*.025*(n+1);
     p = new PVector(r*cos(TWO_PI*t-HALF_PI), r*sin(TWO_PI*t-HALF_PI));
     if(pressed){
       float a = atan2(mouse.x, mouse.y);
       float d = mouse.dist(center);
-      int newN = int((d/(0.04*width))-.5);
+      int newN = int((d/(0.025*width))-.5);
       n = newN;
       t = (PI-a)/TWO_PI;
     }
@@ -39,7 +39,7 @@ class Note{
     // Linia exterior
     stroke(127);
     strokeWeight(1);
-    line(p.x, p.y, width*.48*cos(TWO_PI*t-HALF_PI), width*.48*sin(TWO_PI*t-HALF_PI));
+    line(p.x, p.y, width*.475*cos(TWO_PI*t-HALF_PI), width*.475*sin(TWO_PI*t-HALF_PI));
     
     // Boleta
     stroke(255);
