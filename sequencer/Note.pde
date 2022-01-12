@@ -4,8 +4,8 @@ class Note{
   PVector p;
   float r;
   boolean pressed = false;
-  float ballSize;
   boolean played = false;
+  float ballSize;
   
   Note(int _n){
     n = _n;
@@ -23,7 +23,7 @@ class Note{
       float a = atan2(mouse.x, mouse.y);
       float d = mouse.dist(center);
       int newN = int((d/(0.025*width))-.5);
-      n = newN;
+      n = newN > 18 ? 18 : newN;
       t = (PI-a)/TWO_PI;
     }
     ballSize = pressed ? 20 : 10;
@@ -33,18 +33,19 @@ class Note{
     update();
     
     // Linia interior
-    strokeWeight(3);
-    stroke(255);
+    strokeWeight(positive ? 3 : 1);
+    stroke(positive ? 255 : 127);
     line(0, 0, p.x, p.y);
     
     // Linia exterior
-    stroke(127);
-    strokeWeight(1);
+    stroke(positive ? 127 : 255);
+    strokeWeight(positive ? 1 : 3);
     line(p.x, p.y, width*.475*cos(TWO_PI*t-HALF_PI), width*.475*sin(TWO_PI*t-HALF_PI));
     
     // Boleta
     stroke(255);
     fill(255);
+    strokeWeight(3);
     if(played) fill(255, 0, 0);
     ellipse(p.x, p.y, ballSize, ballSize);
     
@@ -62,9 +63,9 @@ class Note{
   }
   
   void play(float time){
-    if(!played && time>=t){
+    if(!played && (((clockwise && time>=t) || (!clockwise && (1+time)<=t)))){
       played = true;  
-      sendMessage(n);
+      sendMessage(positive ? n : 18-n);
     }
   }
 }

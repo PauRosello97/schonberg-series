@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 41.0, 84.0, 1468.0, 713.0 ],
+		"rect" : [ 27.0, 84.0, 1468.0, 713.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -55,6 +55,7 @@
 					"format" : 6,
 					"id" : "obj-9",
 					"maxclass" : "flonum",
+					"minimum" : 220.0,
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
@@ -437,8 +438,8 @@
 								"parameter_values" : 								{
 									"DelaysMax" : 2483.533385336362244,
 									"DelaysMin" : 0.0,
-									"Dry/Wet" : 16.141732283464599,
-									"Feedback" : 24.275590551181129,
+									"Dry/Wet" : 10.236220472440946,
+									"Feedback" : 0.0,
 									"LevelsMax" : 100.0,
 									"LevelsMin" : 0.0,
 									"MasterGain" : 0.0,
@@ -475,8 +476,8 @@
 											"parameter_values" : 											{
 												"DelaysMax" : 2483.533385336362244,
 												"DelaysMin" : 0.0,
-												"Dry/Wet" : 16.141732283464599,
-												"Feedback" : 24.275590551181129,
+												"Dry/Wet" : 10.236220472440946,
+												"Feedback" : 0.0,
 												"LevelsMax" : 100.0,
 												"LevelsMin" : 0.0,
 												"MasterGain" : 0.0,
@@ -548,7 +549,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 38.0, 422.0, 175.0, 37.0 ]
+					"patching_rect" : [ 38.0, 424.0, 175.0, 37.0 ]
 				}
 
 			}

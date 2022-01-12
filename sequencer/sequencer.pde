@@ -8,6 +8,10 @@ PVector mouse;
 float previousHand;
 float hand = 0;
 PVector center = new PVector(0,0);
+boolean clockwise = false;
+boolean positive = false;
+int lastMillis = 0;
+int counter = 0;
 
 void setup(){
   size(900, 900);
@@ -21,12 +25,19 @@ void setup(){
 }
 
 void update(){
-  hand = (millis()/5000.)%1.;
+  hand += ((millis()-lastMillis)/5000.)*(clockwise ? 1 : -1);
+  hand = hand%1;
+  lastMillis = millis();
   
   mouse = new PVector(mouseX-width/2, mouseY-height/2);
   for(Note note : notes){
-    if(hand<=previousHand) note.played = false;
+    if((clockwise && hand<=previousHand) || (!clockwise && hand>=previousHand)) note.played = false;
     note.play(hand);
+  }
+  if((clockwise && hand<=previousHand) || (!clockwise && hand>=previousHand)){
+    clockwise = !clockwise;
+    counter = (counter+1)%2;
+    if(counter==1) positive = !positive;
   }
   
   previousHand = hand;
