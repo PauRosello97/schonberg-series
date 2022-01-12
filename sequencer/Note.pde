@@ -10,7 +10,8 @@ class Note{
   Note(int _n){
     n = _n;
     previousN = n;
-    t = n/19.;
+    t = random(1);
+    t = round(32.*t)/32.;
     r = width*.025*(n+1);
     p = new PVector(r*cos(TWO_PI*t-HALF_PI), r*sin(TWO_PI*t-HALF_PI));
   }
